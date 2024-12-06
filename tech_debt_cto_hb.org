@@ -1,0 +1,194 @@
+#+title: Tech Debt: CTO Handbook
+Технический долг в представлении CTO Handbook
+
+* Технический долг
+** Введение
+Золотые ворота Сан-Франциско сделаны из стали, которая на самом деле не золотого цвета. Мост покрыт краской, и поддержание его знакового цвета так важно для жителей Сан-Франциско, что они красят его постоянно (ctohb.com/painting). Как только покраска завершается, процесс сразу же начинается заново. Этот процесс непрерывных инвестиций или постоянного обслуживания необходим для поддержания работы самых важных и сложных систем, от моста Золотые ворота до программного проекта вашей команды. Однако для вашего проекта техническое обслуживание не требует ведер с краской; оно проявляется в виде технического долга.
+
+Каждая функция, которую команда разработчиков программного обеспечения предоставляет, в которой присутствует необходимость в будущей работе, или долг. Этот долг может принимать форму ошибок, которые нужно исправить, быстрых доработок функции для предоставления постепенной ценности клиенту, или недостатков в коде, которые следует исправить для улучшения поддерживаемости, производительности или безопасности. Определенное количество долга естественным образом накапливается, даже если ваша команда в отпуске: уязвимости безопасности в зависимом ПО обнаруживаются, пакеты устаревают, новые версии инструментов выпускаются, сторонние API устаревают или изменяются и т. д. Долга избежать нельзя, и вам нужно учитывать его.
+
+** Технический долг и жизненный цикл продукта
+
+Другой способ рассмотреть технический долг - это аналогия с финансовым долгом, таким как ипотека на дом. Когда вы берете ипотеку, чтобы купить дом, вы принимаете осознанное решение взять на себя долг, зная последствия (проценты), чтобы позволить себе сделать что-то желаемое сейчас (получить дом). Затем вы погашаете этот долг последовательно в течение длительного времени (ежемесячные платежи).
+
+То же самое происходит и с техническим долгом. Ваш стартап может намеренно накапливать его в рамках осознанного компромисса, частью которого является установление реалистичного плана его погашения. Вы должны применить ту же логику, что и для погашения финансового долга, к решению вашего технического долга: либо погасите его сразу, если у вас есть дополнительные ресурсы (и нет лучшего места для их вложения), либо погашайте его непрерывно со временем, или погасите его позже, но, возможно, по более высокой общей цене, включая проценты.
+
+Как бы вы не решили погасить свой технический долг, ключ к успешному погашению - осознание того, что долг является неизбежной частью процесса программной инженерии, и проактивное погашение долга - необходимая инвестиция в общее здоровье инженерии.
+
+** Определение технического долга
+
+Другой способ определить технический долг - это техническое решение, реализация или нюанс, который активно снижает эффективность или действенность бизнеса сегодня или в будущем. Важно понимать, что технический долг имеет следствия, которые имеют значение. Часть вашего кода может быть объективно некрасивой или неэффективной, но если эта неэффективность не влияет на бизнес и не требуются изменения этого кода в будущем для поддержания качества, производительности или итерации, то этот код не является затратным с точки зрения технического долга. В конце концов, цель разработки программного обеспечения, особенно в стартапе, - не написание идеальной кодовой базы, а создание программного обеспечения, которое позволяет бизнесу работать.
+
+Не бойтесь долга. Он может служить цели. Например, при создании версии 1 продукта, который еще не был проверен на рынке, техническая команда может принять решение о архитектуре, которая не будет масштабироваться более чем на сто пользователей. Если это решение позволяет команде быстро проверить продукт и определить, будет ли сто пользователей когда-либо использовать этот продукт, то этот путь может быть оправдан, особенно учитывая тот факт, что может потребоваться несколько версий этих прототипов, чтобы найти тот, который понравится пользователям.
+
+** Типы технического долга
+
+1. **Долг по архитектуре** или **дизайну** возникает, когда проект программного обеспечения не способен удовлетворить ближайшие или будущие потребности бизнеса.
+2. **Долг по коду** накапливается, когда реализация была выполнена без учета лучших практик, что приводит к коду, трудно понятному и поддерживаемому.
+3. **Долг по тестированию** накапливается, когда проведено недостаточное количество автоматизированных тестов для обеспечения уверенности команды в правильности кодовой базы.
+4. **Долг по инфраструктуре** возникает, когда инфраструктура, наблюдаемость и вспомогательные системы не являются надежными или были плохо поддержаны.
+5. **Долг по документации** возникает, когда недостаточно документации или она устарела/недостоверна, что затрудняет знакомство членов команды с проектом.
+6. **Долг по навыкам** возникает, когда у членов команды недостаточно навыков для поддержания или обновления кода или окружающей инфраструктуры.
+7. **Процессный долг** накапливается, когда команда несогласованно решает проблемы, что приводит к ошибкам, задержкам или повышенным затратам.
+
+*** Банкротство технического долга
+
+Если ваш стартап игнорирует или упускает из виду технический долг достаточно долго, это может стать серьезным препятствием для будущего прогресса. Команды могут непреднамеренно обнаружить, что тратят 80 или даже 100 процентов своего времени на устранение проблем или неэффективности систем, что называется банкротством технического долга.
+
+Некоторые признаки того, что ваша команда может быть банкротом по техническому долгу:
+
+- Вы регулярно сталкиваетесь с сбоями в производстве, имеющими материальное влияние на бизнес.
+- Вы получаете постоянные возражения или преувеличенные сроки на новые функции из-за необходимости справляться с долгами.
+- Команда жалуется, что кодовая база слишком сложная для выполнения работы.
+- Новые функции не могут быть выпущены без случайного повреждения старых функций или внедрения неприемлемо высокого уровня дефектов.
+
+Если вы оказались в ситуации банкротства по техническому долгу, пришло время поднять тревогу, пересмотреть ожидания со заинтересованными сторонами, разработать план по консолидированию долга и немедленно начать его погашение.
+
+Если вы были честными со своими руководителями, вы должны иметь необходимую Credibility, чтобы объяснить проблему технического долга и разработать общее понимание ROI для инвестирования в решение.
+
+** Измерение долга: Инвентаризация долга
+
+В отличие от ипотеки или автокредита, нет сайта, который даст вам отчет о точной сумме вашего технического долга и оставшихся платежах. Некоторые формы долга можно измерить количественно, но большая часть анализа является качественной. Для здорового и ответственного управления долгом я рекомендую проводить инвентаризацию долга.
+
+Опрос рекомендуется проводить через регулярные интервалы. Где-то от одного до четырех раз в год, проведите трезвый анализ по различным видам долга,producing honest assessment of where the team is operating. Не проводите опрос отдельно; сделайте это в сотрудничестве с другими инженерами в команде, которые работают с кодом каждый день и регулярно взаимодействуют с долгом.
+
+Опрос может быть таким простым: для каждого из следующих типов долга оцените, сколько у нас на шкале от 1 до 10, а затем предоставьте несколько предложений, обосновывающих оценку.
+
+Используйте результаты опроса, чтобы информировать, как ваша команда тратит энергии на погашение долга, и сравнивайте результаты между опросами со временем, чтобы убедиться, что долг остается на разумном уровне, а ваша команда регулярно решает свои самые большие болевые точки по долгу.
+
+** Стратегии погашения долга
+
+Чтобы принять решение о том, когда погашать технический долг, вам следует сначала рассмотреть, сколько времени вашей команды стоит на это тратить. Ключевые моменты включают:
+
+ * Сколько долга существует, согласно вашему последнему опросу инвентаризации долга
+ * Насколько это мешает вашей компании в повседневной работе, например, из-за сбоев, потери клиентов или уровня дефектов
+ * Насколько это затрудняет вашей команде выполнение новых проектов
+ * Насколько сложно будет погасить долг
+
+Если вы не находитесь в банкротстве по техническому долгу и ваша цель - поддерживать здоровый уровень долга, я рекомендую выделять от 10 до 20 процентов времени вашей команды на инвестиции в нефункциональную инженерную деятельность (например, погашение долга, изучение новых паттернов/доказательств концепции, улучшение опыта разработчиков и т.д.). Чем серьезнее текущее влияние долга и чем больше усилий требуется для его погашения, тем большую долю времени вашей команды вы должны выделить.
+
+*** Погашение по мере необходимости
+
+Наиболее распространенный способ справиться с техническим долгом - это погашать его по мере необходимости, то есть долг погашается как часть бизнес-ориентированного проекта. Это часто выглядит так: команда добавляет задачи по техническому долгу, связанные с историями, которые были выбраны для спринта на планировочном собрании. Это подход с низкими накладными расходами и небольшими затратами на планирование, и он может сработать. Но имейте в виду некоторые потенциальные подводные камни:
+
+ * Погашение по мере необходимости, по факту, менее заметное для более широкой команды, может привести к системному недофинансированию технического долга. Убедитесь, что вы честно и прозрачно делитесь с командой тем процентом времени, который вы ожидаете провести на погашение долга.
+
+ * Добавление технического долга в рамках спринта может подразумевать, что инвестиции в технический долг - это второстепенная задача по сравнению с целями спринта, и соответственно, такие задачи могут быть исключены из объема работы, если команда будет испытывать нехватку времени.
+
+ * Решение вопросов технического долга в рамках спринта может восприниматься как замедление работы спринта или причинение задержек, а не как инвестиция в производительность и общее здоровье системы.
+
+*** Периодическое погашение
+
+Периодическое погашение похоже на то, как можно погашать автокредит или ипотеку. Команда выделяет пространство для погашения долга через фиксированные интервалы (например, один день за спринт, пару дней в месяц или пару недель в квартал). Google известен тем, что позволил своим инженерам использовать 20 процентов времени на работу над тем, что им нравится, включая погашение долга или инновации в новых проектах и инструментах. Идея здесь та же: как менеджер, вы явно выделяете время и поощряете команду вкладывать средства в инструменты и процессы, используемые для разработки.
+
+Например, метод Shape Up описывает двухнедельный период охлаждения после шестинедельного цикла или 25 процентов восьминедельного периода для проведения технических инвестиций. Имейте в виду, что 25 процентов - это не магическое число; правильный процент будет зависеть от инвентаризации долга вашей команды.
+
+*** Непрерывное погашение
+
+В зависимости от того, насколько дорого обходится долг вашей команде, вам может понадобиться выделить больше ресурсов на общее качество системы, чем позволяет периодическая стратегия. Это может выглядеть как наличие выделенной команды, которую я называю «командой клиентов» в сценарии с двумя командами (см. Проектное обслуживание: Философия двух команд, стр. 113), которая погашает технический долг как часть своей повседневной работы и целей.
+
+Важно убедиться, что у любой команды, основной целью которой является внутреняя эффективность, такой как команда по техническому долгу или команда клиентов, есть четкие и измеримые цели для своей работы. Например, если в вашей инвентаризации долга долг по тестированию ставится на первое место, то измеряйте уровень дефектов и покрытие кода и привлекайте команду клиентов к ответственности за улучшение этих метрик. Если ваш инфраструктурный долг является самым большим, сосредоточьтесь на времени безотказной работы и метриках среднего времени восстановления.
+
+*** Коммуникация по поводу технического долга
+
+Нетехнические руководители не ожидают от своих технических команд совершенства. Но они ожидают высокой производительности и последовательно выполненных ожиданий.
+
+Когда речь идет о долге, это означает четкое сообщение о вашей стратегии по поддержанию долга на управляемом уровне и также предоставление заранее честной информации о том, когда долг может помешать бизнес-целям, а также вашей стратегии по его погашению, чтобы это больше не стало барьером.
+
+
+* Исходный текст на английском в markdown
+#+begin_src md
+## Tech Debt
+
+San Francisco's Golden Gate Bridge is made out of steel, which is not actually golden in color. The bridge is painted, and maintaining the iconic color of the bridge is so important to San Franciscans that they paint it continuously (ctohb.com/painting). Once repainting is finished, the process immediately restarts. This form of continuous investment or perpetual maintenance is what's required to keep the most important and sophisticated systems performing to expectations, from the Golden Gate Bridge to your team's software project. Only for your project, the maintenance doesn't require paint buckets; it comes in the form of technical debt.
+
+Every feature a software development team delivers brings with it some level of need for future work, or debt. That debt can take the form of bugs that need fixing, fast-follows to the feature to deliver incremental customer value, or sloppiness in the code that should be fixed to improve maintainability, performance, or security. A certain amount of debt naturally accrues even if your team is out on vacation: security vulnerabilities in dependent software are found, packages go out of date, new versions of tools are released, third-party APIs are deprecated or changed, etc. Debt is unavoidable and you need to account for it.
+
+### Tech Debt And The Product Lifecycle
+
+Another way to think of tech debt is like financial debt, such as a mortgage on a house. When you take out a mortgage to buy a house, you're making a deliberate decision to take on debt, knowing the consequences (interest), to enable you to do something you want now (get a house). Then you pay down that debt on a consistent basis over an extended period of time (monthly payments).
+
+The same happens with technology debt. Your startup may accumulate it deliberately as part of a conscious tradeoff, and part of that tradeoff is establishing a realistic plan for paying it down. You should apply the same kind of logic you would to pay down financial debt to addressing your technical debt: either pay it off upfront because you have extra resources (and no better place to put those resources), pay it off continuously over time, or pay it all off down the road but perhaps at a higher total price that includes interest.
+
+However you choose to pay down your tech debt, the key to doing so successfully is to recognize that debt is an inevitable part of the software engineering process, and proactively paying down debt is a necessary investment in overall engineering health.
+
+#### Defining Tech Debt
+
+Another way to define technical debt is as a technical decision, implementation, or nuance that actively reduces the efficiency or effectiveness of the business today or in the future. The point is that tech debt has a consequence that matters. Some of your code might be objectively ugly or inefficient, but if that inefficiency has no impact on the business and There's no need to modify that code in the future to maintain quality, performance, or iteration, then that code isn't costly in terms of tech debt. After all, the goal of software development, especially at a startup, is not to write the perfect codebase, but to build software that enables the business.
+
+Don't be afraid of debt. It can serve a purpose. For example, when building Version 1 of a product that's not yet been validated in the market, a technical team may decide on an architecture that will not scale past a hundred users. If that decision allows the team to rapidly validate the product and determine whether or not a hundred users will ever use the product, that path may be worthwhile especially given the fact that it may take several versions of these prototypes to find one that users love.
+
+There are at least seven types of technical debt:
+
+1. **Architecture** or **Design Debt** arises when the design of the software is not capable of meeting the near-term or future needs of the business. For example, the design makes it too challenging to build the features the business needs, or the design won't scale to the number of users or performance requirements of the business.
+1. **Code Debt** accrues when the implementation itself was done without paying attention to best practices, yielding code that's difficult to understand and maintain.
+1. **Test Debt** accumulates when you've run insufficient automated tests to provide the team confidence in the correctness of the codebase.
+1. **Infrastructure Debt** occurs when the infrastructure, observability, and supporting systems are not robust or have been poorly maintained, leading to difficulty scaling or deploying updates, or poor uptime and reliability.
+1. **Documentation Debt** results when There's insufficient documentation, or the documentation is stale/inaccurate, which can make it difficult for team members to onboard a project.
+1. **Skill Debt** rises when the team members lack the needed skills to maintain or update the code or surrounding infrastructure.
+1. **Process Debt** accrues when the team is inconsistent in how it solves problems, leading to mistakes, delays, or increased costs.
+
+#### Tech Debt Bankruptcy
+
+If your startup neglects or ignores tech debt for long enough, it can become a major impediment to future progress. Teams can unintentionally find themselves spending 80 or even 100 percent of their time sorting through system problems or inefficiencies as a result of tech debt, a state known as tech debt bankruptcy.
+
+Some signs your team may be tech debt-bankrupt:
+
+ * You are regularly dealing with production outages to the point of material business impact.
+ * You receive constant pushback or exaggerated timelines on new features due to the need to deal with debt.
+ * The team complains that a codebase is too complex to get work done.
+ * New features cannot be shipped without accidentally breaking old features or introducing an unacceptably high level of defects.
+
+If you find yourself in tech debt bankruptcy, it's time to raise the alarm, reset expectations with stakeholders, devise a plan to consolidate the debt, and begin paying it down immediately.
+
+If you've been honest with your peers in leadership (see Delivering Bad News, page 46), you should have the necessary credibility to explain the tech debt problem and develop a common understanding of the ROI for an investment in resolving tech debt.
+
+#### Measuring Debt The Debt Inventory
+
+Unlike with a mortgage or car loan, There's no website you can visit that will give you a statement of your exact amount of tech debt and remaining payments. Some forms of debt can be measured quantitatively, but most of the analysis is qualitative. For healthy and responsible debt management at scale, I recommend a debt inventory survey.
+
+The survey should be taken at regular intervals. Somewhere from one to four times per year, do a sober analysis across the varying kinds of debt, producing an honest assessment of where the team is operating. Don't take the survey independently; rather, do so in collaboration with other engineers on the team who are working in the code every day and interacting with the debt on a regular basis.
+
+A survey can be as simple as this: for each of the following types of debt, rate how much we have on a scale of 1 to 10, then provide a few sentences justifying the score.
+
+Use the results of the survey to inform how your team spends its energy paying down debt, and compare results between surveys over time to ensure debt stays at a reasonable level and your team is regularly solving its biggest debt pain points.
+
+#### Strategies For Paying Down Debt
+
+In order to decide when to pay down tech debt, you should first consider how much of your team's time is worth spending on it. Key considerations include:
+
+ * How much debt exists, as indicated by your most recent debt inventory survey
+ * How much it is hindering your company's ability to run day to day i.e., via outages, customer churn, or defect rates
+ * How much it is hurting your team's ability to deliver on new projects How difficult it will be to pay down the debt
+
+If you are not in tech debt bankruptcy and your goal is to maintain a healthy level of debt, I recommend allocating somewhere between 10 20 percent of your team's time to investments in non-feature engineering (e.g., paying down debt, exploring new patterns/proofs of concept, improving developer experience, etc.). The more severe your current debt impact, and the higher the effort to pay down the debt, the higher the percentage of your team's time you should allocate.
+
+##### Just-In-Time Payment
+
+The most common way to handle tech debt is to pay it off on a Just-in- Time basis, meaning the debt is paid off as part of a business-driven project. This will often look like a team adding tech debt tickets that relate to the stories that have been selected for a sprint in a planning meeting. This is a low-overhead and low-planning-effort approach, and it can work out well. But be mindful of some potential pitfalls:
+
+ * Just-in-time payments, by virtue of being less visible to the broader team, can lead to systemic underinvestment in tech debt. Make sure you are being honest and transparent with the team as you do just-in- time-payment about what total percentage of team time you're expecting to be in debt.
+
+ * Adding tech debt as part of a sprint can imply that investing in tech debt is a secondary objective to the sprint goals, and thus likely to get cut from scope if a team runs low on time.
+
+ * Tackling tech debt in a sprint may be perceived as slowing down the sprint or causing delays, rather than as an investment in velocity and overall system health.
+
+##### Periodic Paydown
+
+Periodic paydown is akin to how one might pay down a car loan or a mortgage. The team makes space to pay off debt on a fixed interval (e.g., a day per sprint, a couple of days per month, or a couple of weeks per quarter). Google famously allowed their engineers 20 percent time to work on whatever they wanted, including paying down debt or innovating on new projects and tools. The idea here is the same: as a manager, you explicitly make time and encourage the team to make investments into the tools and processes used to do engineering.
+
+For example, the Shape Up method (see Tech Process, page 157) describes a two-week cooldown period after a six-week cycle, or 25 percent of an eight-week period, for making technical investments. Keep in mind that 25 percent isn't a magic number; the right percentage will depend on your team's debt inventory.
+
+#### Continuous Paydown
+
+Depending on how expensive debt is for your team, you may want to dedicate more resources to overall system quality than a periodic strategy allows. This looks like having a dedicated team what I call a customer crew in a two-crew scenario (see Project Maintenance: TheTwo Crews Philosophy, page 113) pay down tech debt as part of their everyday work and objectives.
+
+It's important to ensure that any team whose primary objective is internal efficiency, such as a tech debt team or a customer crew, has clear and measurable goals for their work. For example, if your debt inventory ranks test debt as your highest debt category, then measure defect rates and code coverage and hold the customer crew accountable for improving those metrics. If your infrastructure debt is the largest, then focus on uptime and Mean Time to Recovery metrics.
+
+### Communication of Tech Debt
+
+Non-technical leaders don't expect perfection from their technical teams. But they do expect high performance and consistently met expectations.
+
+When it comes to debt, that means clearly communicating your strategy for keeping debt at a manageable level, and also providing upfront and honest communication about when debt may get in the way of business goals, as well as your strategy for paying it down so it's no longer a blocker.
+
+#+end_src
